@@ -15,7 +15,7 @@ public class AbstractFactory {
     public BufferedImage loadSampleImage( String fileName ) {
         ImageIcon ico = new ImageIcon( fileName );//objeto de imagenIco
 
-        int width = ico.getIconWidth();//obtengo alto y ancho  ancho
+        int width = ico.getIconWidth();//obtengo alto y ancho  ancho //checar problema con rutas
         int height = ico.getIconHeight();//alto
 
         BufferedImage ret = new BufferedImage( width, height, BufferedImage.TYPE_INT_RGB );//imagen color
@@ -23,7 +23,7 @@ public class AbstractFactory {
         g2.drawImage( ico.getImage(), 0, 0, null );//coloreamos la imagen pero empezando de las exquinas
         return ret; //Regresamos el buffer
     }
-
+    //Se debe crear una lista con todos los componentes de la imagen , regresamos una lista de un Image Vector Genetic
     public List<ImageVectorGenetic> createPopulation( int count, ImageFitCalculator fitCalculator,
                                                       int polygonsCount, int vertexesCount,
                                                       int maxWidth, int maxHeight,
@@ -32,7 +32,7 @@ public class AbstractFactory {
                                                       double xMutRange, double yMutRange,
                                                       double rMutRange, double gMutRange,
                                                       double bMutRange, double aMutRange) {
-        List<ImageVectorGenetic> population = new LinkedList<ImageVectorGenetic>();
+        List<ImageVectorGenetic> population = new LinkedList<>();
 
         for ( int i = 0; i < count; i++ )
         {

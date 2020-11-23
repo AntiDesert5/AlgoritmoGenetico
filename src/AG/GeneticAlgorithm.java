@@ -6,10 +6,10 @@ import static java.lang.Math.random;
 
 public class GeneticAlgorithm<T extends GeneticOptimizable<T>> extends Observable {
 
-    private List<VectorFitnessCalculated> population;
-    private double pMutation;
-    private double pCrossover;
-    private int parentsCount;
+    private List<VectorFitnessCalculated> población;
+    private double pMutation;//mutacion porcentaje
+    private double pCrossover;//cruza
+    private int parentsCount;//padres
     private int elitarParentsCount = 1;
 
     private class VectorFitnessCalculated implements Comparable<VectorFitnessCalculated> {
@@ -32,38 +32,38 @@ public class GeneticAlgorithm<T extends GeneticOptimizable<T>> extends Observabl
     }
 
     public GeneticAlgorithm( List<T> vectors ) {
-        population = new LinkedList<VectorFitnessCalculated>();
+        población = new LinkedList<>();
 
         for ( T v : vectors )
         {
             VectorFitnessCalculated tmp = new VectorFitnessCalculated( v, v.fitness() );
-            population.add(tmp);
+            población.add(tmp);
         }
 
-        Collections.sort(population);
+        Collections.sort(población);
     }
 
     public void iterate( int iterationsCount ) {
 
-        int populationSize = population.size();
+        int populationSize = población.size();
 
-        List<VectorFitnessCalculated> parents = new ArrayList<VectorFitnessCalculated>(parentsCount);
+        List<VectorFitnessCalculated> parents = new ArrayList<>(parentsCount);
 
         for ( int i = 0; i < iterationsCount; i++ )
         {
-            Collections.sort( population );
+            Collections.sort( población );
 
             parents.clear();
 
             int currParentIndex = 0;
-            while ( ( population.size() > 0 ) && ( currParentIndex < parentsCount ) )
+            while ( ( población.size() > 0 ) && ( currParentIndex < parentsCount ) )
             {
-                parents.add( population.get(0) );
-                population.remove(0);
+                parents.add( población.get(0) );
+                población.remove(0);
                 ++currParentIndex;
             }
 
-            population.clear();
+            población.clear();
 
             for ( int j = 0; j < populationSize - elitarParentsCount; j++ )
             {
@@ -77,23 +77,23 @@ public class GeneticAlgorithm<T extends GeneticOptimizable<T>> extends Observabl
                 child = child.mutate( pMutation );
 
                 VectorFitnessCalculated tmp = new VectorFitnessCalculated( child, child.fitness() );
-                population.add( tmp );
+                población.add( tmp );
             }
 
             for ( int j = 0; j < elitarParentsCount; j++ )
             {
-                population.add( parents.get(j) );
+                población.add( parents.get(j) );
             }
 
-            Collections.sort( population );
+            Collections.sort( población );
         }
 
         setChanged();
-        notifyObservers(population.get(0).fitness);
+        notifyObservers(población.get(0).fitness);
     }
 
     public T getBestFitVector() {
-        T ret = population.get(0).vector;
+        T ret = población.get(0).vector;
         return ret;
     }
 
@@ -120,5 +120,4 @@ public class GeneticAlgorithm<T extends GeneticOptimizable<T>> extends Observabl
     public void setParentsCount(int parentsCount) {
         this.parentsCount = parentsCount;
     }
-
 }

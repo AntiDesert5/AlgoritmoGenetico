@@ -13,6 +13,7 @@ public class MyPolygon implements Comparable<MyPolygon> {
     int a;
     double area;
 
+    //Constructor
     public MyPolygon( int[] xCoords, int[] yCoords, int r, int g, int b, int a, int polygonComplexity ) {
         this.r = r;
         this.g = g;

@@ -241,20 +241,6 @@ public class ImageVectorGenetic extends ImageVector
                                 retCoords[currPolygonStartIndex + j * 2 + 1] += rnd.nextInt(coordMut) - rnd.nextInt(coordMut);
                             }
                             break;
-//					case 11:
-//						int dy = rnd.nextInt(coordMut * 2) - rnd.nextInt(coordMut * 2);
-//						for ( int j = 0; j < super.vertexesCount; j++ )
-//						{
-//							retCoords[currPolygonStartIndex + j * 2 + 1] += dy;
-//						}
-//						break;
-//					case 12:
-//						int dx = rnd.nextInt(coordMut * 2) - rnd.nextInt(coordMut * 2);
-//						for ( int j = 0; j < super.vertexesCount; j++ )
-//						{
-//							retCoords[currPolygonStartIndex + j * 2] += dx;
-//						}
-//						break;
                     }
                 }
             }
@@ -413,8 +399,6 @@ public class ImageVectorGenetic extends ImageVector
             retRGBA[currColorStartIndex + 2] += delta * bMutRange;
             retRGBA[currColorStartIndex + 3] += delta * aMutRange;
         }
-
-//----------------------------------------------------------------------------------------------
 
         public void setXMutRange(double mutRange) {
             xMutRange = mutRange;
