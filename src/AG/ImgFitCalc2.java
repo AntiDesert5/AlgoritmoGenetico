@@ -3,26 +3,26 @@ package AG;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
-public class ImgFitCalc2 extends ImageFitCalculator {
+public class ImgFitCalc2 extends calculoimagenfitness {
 
-    private List<ImageVectorGenetic> baseVectors;
+    private List<vectorimagenGenetico> baseVectors;
 
     public ImgFitCalc2(BufferedImage sampleImage,
-                       ImageSimilarity imageSimilarity, List<ImageVectorGenetic> baseVectors) {
-        super(sampleImage, imageSimilarity);
+                       similitudImagen similitudImagen, List<vectorimagenGenetico> baseVectors) {
+        super(sampleImage, similitudImagen);
         this.baseVectors = baseVectors;
     }
 
     @Override
     public double calcFit(ImageVector imageVector) {
-        for( ImageVectorGenetic vect : baseVectors )
+        for( vectorimagenGenetico vect : baseVectors )
         {
-            vect.paint( super.operationalImageGraphics );
+            vect.paint( super.ImagenGraficos);
         }
 
-        imageVector.paint( super.operationalImageGraphics );
-        double fit = super.imageSimilarityCalculator.difference( sampleImage, operationalImage );
-        super.operationalImageGraphics.clearRect(0, 0, width, height);
+        imageVector.paint( super.ImagenGraficos);
+        double fit = super.calculosimilitudImagen.difference( sampleImage, operationalImage );//diferencia entre la imagen de muestra y la pasada (la que pasamos por parametro)
+        super.ImagenGraficos.clearRect(0, 0, width, height);
         return fit;
     }
 

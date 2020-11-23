@@ -1,18 +1,12 @@
 package AG;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
-
-import AG.ImageVectorGenetic;
 
 public class Main {
 
@@ -24,7 +18,7 @@ public class Main {
     public static void main(String[] args) {
         final AbstractFactory af = new AbstractFactory();//creo objeto de clase Abstract Factory
         //Agrego la imagen que voy a ocupar, (tengo problemas con imagenes cuadradas, no todas funcionan)
-        final BufferedImage sampleImage = af.loadSampleImage("src/Imagenes/mona-lisa-big.jpg");
+        final BufferedImage sampleImage = af.loadSampleImage("src/Imagenes/goku.png");
         //sample imagen guarda el buffer de la imagen que mandamos
 
 
@@ -56,18 +50,18 @@ public class Main {
             @Override
             public void run() {        //funcion para correr
                 //generamos lista de Imagen Vector
-                final List<ImageVectorGenetic> bestVectors = new LinkedList<ImageVectorGenetic>();
+                final List<vectorimagenGenetico> bestVectors = new LinkedList<vectorimagenGenetico>();
 
                 nextSchedule = false; //proximo programa
 
-                ImageFitCalculator fitCalc = new ImgFitCalc2(sampleImage, new ImageSimilaritySqrMulCos(), bestVectors);
+                calculoimagenfitness fitCalc = new ImgFitCalc2(sampleImage, new similitudImagenSqrMulCos(), bestVectors);
 
-                List<ImageVectorGenetic> population = af.createPopulation(3, fitCalc, 25, 8, sampleImage);
+                List<vectorimagenGenetico> population = af.createPopulation(3, fitCalc, 25, 8, sampleImage);
 
-                final GeneticAlgorithm<ImageVectorGenetic> ga_2 = new GeneticAlgorithm<>(population);
+                final algoritmoGenetico<vectorimagenGenetico> ga_2 = new algoritmoGenetico<>(population);
 
                 ga_2.setElitarParentsCount(1);
-                ga_2.setParentsCount(2);//padres
+                ga_2.setContadorPadres(2);//padres
                 ga_2.setPCrossover(0.4);//porcentaje cruza
                 ga_2.setPMutation(0.3);//porcentaje mutacion
 
@@ -103,12 +97,12 @@ public class Main {
                 ga_2.addObserver(obs);
 
                 for (; ; ) {
-                    ga_2.iterate(10);
+                    ga_2.Iterar(10);
 
                     big.clearRect(0, 0, scaledImgWidth, scaledImgHeight);
-                    ImageVectorGenetic bestVector_2 = ga_2.getBestFitVector();
+                    vectorimagenGenetico bestVector_2 = ga_2.getBestFitVector();
 
-                    for (ImageVectorGenetic vect : bestVectors) {
+                    for (vectorimagenGenetico vect : bestVectors) {
                         vect.paint(big);
                     }
 

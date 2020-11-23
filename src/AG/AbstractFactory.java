@@ -6,9 +6,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.swing.ImageIcon;
-import AG.ImageFitCalculator;
-import AG.ImageVectorGenetic;
-import AG.ImageSimilarity;
 
 public class AbstractFactory {
 
@@ -24,19 +21,19 @@ public class AbstractFactory {
         return ret; //Regresamos el buffer
     }
     //Se debe crear una lista con todos los componentes de la imagen , regresamos una lista de un Image Vector Genetic
-    public List<ImageVectorGenetic> createPopulation( int count, ImageFitCalculator fitCalculator,
-                                                      int polygonsCount, int vertexesCount,
-                                                      int maxWidth, int maxHeight,
-                                                      int rMaxRandVal, int gMaxRandVal,
-                                                      int bMaxRandVal, int aMaxRandVal,
-                                                      double xMutRange, double yMutRange,
-                                                      double rMutRange, double gMutRange,
-                                                      double bMutRange, double aMutRange) {
-        List<ImageVectorGenetic> population = new LinkedList<>();
+    public List<vectorimagenGenetico> createPopulation(int count, calculoimagenfitness fitCalculator,
+                                                       int polygonsCount, int vertexesCount,
+                                                       int maxWidth, int maxHeight,
+                                                       int rMaxRandVal, int gMaxRandVal,
+                                                       int bMaxRandVal, int aMaxRandVal,
+                                                       double xMutRange, double yMutRange,
+                                                       double rMutRange, double gMutRange,
+                                                       double bMutRange, double aMutRange) {
+        List<vectorimagenGenetico> population = new LinkedList<>();
 
         for ( int i = 0; i < count; i++ )
         {
-            ImageVectorGenetic ivg = new ImageVectorGenetic( polygonsCount, vertexesCount, fitCalculator);
+            vectorimagenGenetico ivg = new vectorimagenGenetico( polygonsCount, vertexesCount, fitCalculator);
             ivg.setXMutRange(xMutRange);
             ivg.setYMutRange(yMutRange);
 
@@ -53,8 +50,8 @@ public class AbstractFactory {
         return population;
     }
 
-    public List<ImageVectorGenetic> createPopulation( int count, ImageFitCalculator fitCalculator,
-                                                      int polygonsCount, int vertexesCount, BufferedImage sampleImage ) {
+    public List<vectorimagenGenetico> createPopulation(int count, calculoimagenfitness fitCalculator,
+                                                       int polygonsCount, int vertexesCount, BufferedImage sampleImage ) {
 
         int widthMutationInterval = sampleImage.getWidth() / 10;
         int heightMutationInterval = sampleImage.getHeight() / 10;

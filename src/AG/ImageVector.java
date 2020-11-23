@@ -63,7 +63,7 @@ public class ImageVector {
         double[] coords = coordinatesVector.getVector();
         double[] rgba = rgbaVector.getVector();
 
-        List<MyPolygon> polygons = new LinkedList<MyPolygon>();
+        List<Poligono> polygons = new LinkedList<Poligono>();
 
         for ( int i = 0; i < polygonsCount; i++ )
         {
@@ -97,16 +97,16 @@ public class ImageVector {
             b = ( b > 255 ) ? 511 - b : b;
             a = ( a > 255 ) ? 511 - a : a;
 
-            MyPolygon curr = new MyPolygon( xPoints, yPoints, r, g, b, a, vertexesCount );
+            Poligono curr = new Poligono( xPoints, yPoints, r, g, b, a, vertexesCount );
 
             polygons.add(curr);
         }
 
         Collections.sort(polygons);
-        for ( MyPolygon p : polygons )
+        for ( Poligono p : polygons )
         {
             graphics.setColor( new Color( p.r, p.g, p.b, p.a ) );
-            graphics.fillPolygon( p.xCoords, p.yCoords, p.polygonComplexity );
+            graphics.fillPolygon( p.xCoords, p.yCoords, p.complejidadPoligono);
         }
     }
 

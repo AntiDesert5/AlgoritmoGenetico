@@ -2,7 +2,7 @@ package AG;
 
 import static java.lang.Math.sqrt;
 
-public class ImageSimilaritySqrMulCos extends ImageSimilarity {
+public class similitudImagenSqrMulCos extends similitudImagen {
 
     @Override
     public double distanceRGB(int r1, int g1, int b1, int r2, int g2, int b2) {
